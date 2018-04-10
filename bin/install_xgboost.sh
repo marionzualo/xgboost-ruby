@@ -9,7 +9,7 @@ target=$(cd "$target"; pwd -P)
 cd "$target"
 
 if [ ! -d ".git" ]; then
-  git clone --recursive --jobs 4 https://github.com/dmlc/xgboost .
+  git clone --recursive https://github.com/dmlc/xgboost .
 
   if [[ -z $1 ]]; then
     git pull
