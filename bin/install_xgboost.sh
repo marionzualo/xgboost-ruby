@@ -9,11 +9,15 @@ target=$(cd "$target"; pwd -P)
 cd "$target"
 
 if [ ! -d ".git" ]; then
-  git clone --recursive --jobs 4 --depth 1 https://github.com/dmlc/xgboost .
-fi
+  git clone --recursive --jobs 4 https://github.com/dmlc/xgboost .
 
-git pull
-git submodule update --remote
+  if [[ -z $1 ]]; then
+    git pull
+    git submodule update --remote
+  else
+    git checkout $1
+  fi
+fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
   cp make/minimum.mk config.mk
